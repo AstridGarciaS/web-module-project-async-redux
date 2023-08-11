@@ -1,14 +1,49 @@
-const data = [
-    {
-        title: "React in Action",
-        authors: [
-            "Mark Tielens Thomas"
-          ],
-          imageLinks: {
-            "smallThumbnail": "http://books.google.com/books/content?id=S8gBMQAACAAJ&printsec=frontcover&img=1&zoom=5&source=gbs_api",
-          }
-    }
+import React, { useState } from "react";
 
-]
+const Book = (props) => {
+  const { book } = props;
 
-export default data;
+  if (!book) {
+    return null; 
+  }
+  const [showDescription, setShowDescription] = useState(false);
+
+  const {
+    title,
+    authors,
+    description,
+    imageLinks,
+    pageCount,
+    categories,
+    language,
+    infoLink,
+  } = book.volumeInfo;
+
+  return (
+    <div className="card">
+      <h3>{title}</h3>
+      <p>Authors: {Array.isArray(authors) ? authors.join(", ") : authors}</p>
+      {imageLinks && imageLinks.thumbnail && (
+        <img src={imageLinks.thumbnail} alt={title} />
+      )}
+        <p>
+          <button
+            className="toggle-description"
+            onClick={() => setShowDescription(!showDescription)}
+          >
+            {showDescription ? "Hide Description" : "Show Description"}
+          </button>
+        </p>
+        {showDescription && <p className="card-description">{description}</p>}
+        <p className="card-details">
+          Page Count: {pageCount} | Categories: {categories.join(", ")} | Language: {language}
+        </p>
+      <p>Categories: {categories.join(", ")}</p>
+      <a href={infoLink} target="_blank" rel="noopener noreferrer">
+        More Info
+      </a>
+    </div>
+  );
+};
+
+export default Book;

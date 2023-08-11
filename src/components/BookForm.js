@@ -1,16 +1,30 @@
 import React from "react";
 import { connect } from "react-redux";
-import { useState } from "react"
+import { getBooks } from "../actions";
+import { useState } from "react";
 
 
-const BookForm = () => {
-    return(
-        <form>
-            <input type="text" placeholder="Enter Book Name"/>
-            <button>Search</button>
-        </form>
-    )
+const SearchForm = (props) => {
+const { getBooks } = props
+const [ searchTerm, setSearchTerm ] = useState('')
+
+const handleSubmit = e => {
+    e.preventDefault()
+    getBooks(searchTerm)
 }
 
+const handleChange = e => {
+    setSearchTerm(e.target.value)
+}
 
-export default BookForm;
+  return (
+      <form 
+      onSubmit={handleSubmit}
+      >
+        <input type="text" value={searchTerm} onChange={handleChange}/>
+        <button>Search</button>
+      </form>
+  );
+};
+
+export default connect(null, {getBooks})(SearchForm)
