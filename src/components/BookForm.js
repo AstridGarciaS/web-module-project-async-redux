@@ -21,7 +21,7 @@ const handleChange = e => {
       <form 
       onSubmit={handleSubmit}
       >
-        <input type="text" value={searchTerm} onChange={handleChange}/>
+        <input type="text" placeholder="Enter Book Information"value={searchTerm} onChange={handleChange}/>
         <button>Search</button>
       </form>
   );

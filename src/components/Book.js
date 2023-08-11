@@ -22,7 +22,7 @@ const Book = (props) => {
   return (
     <div className="card">
       <h3>{title}</h3>
-      <p>Authors: {Array.isArray(authors) ? authors.join(", ") : authors}</p>
+      <p>Authors: {Array.isArray(authors) ? authors : authors}</p>
       {imageLinks && imageLinks.thumbnail && (
         <img src={imageLinks.thumbnail} alt={title} />
       )}
@@ -36,9 +36,9 @@ const Book = (props) => {
         </p>
         {showDescription && <p className="card-description">{description}</p>}
         <p className="card-details">
-          Page Count: {pageCount} | Categories: {categories.join(", ")} | Language: {language}
+          Page Count: {pageCount} | Categories: {categories} | Language: {language}
         </p>
-      <p>Categories: {categories.join(", ")}</p>
+      <p>Categories: {categories}</p>
       <a href={infoLink} target="_blank" rel="noopener noreferrer">
         More Info
       </a>
